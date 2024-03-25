@@ -35,8 +35,11 @@ Model stats:
 Evaluation on unseen testing set (800+ images):
 -- Testing result -- 
 Testing accuracy: 0.9578587699316629
+
 Testing Recall: 0.9875195007800313
+
 Testing Precision: 0.9561933534743202
+
 Testing F1: 0.9716039907904835
 
 
