@@ -14,7 +14,7 @@ shuffled_dataset.zip contains all the images the model was trained on, after the
 
 The compiled program available in Release section is a standalone software which can be run on any computer running Windows 7 or newer, enabling the user to classify any number of X-Ray scans within moments. There is no need for any additional library installation, configuration or model training.
 
-##Features
+## Features
 - Single file program, exceptionally user-friendly and easy to use machine learning binary classifier.
 - Option of using one of two built-in, pretrained models.
 - One of the best performing publicly available pneumonia detection models, achieving 96.4% accuracy and 98.1% Recall.
