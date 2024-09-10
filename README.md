@@ -24,7 +24,7 @@ The compiled program available in Release section is a standalone software which
  
 
 
-##Requirements
+## Requirements
     
     For running only the Python GUI tool to classify images:
         Python >=3.6
@@ -42,26 +42,24 @@ The compiled program available in Release section is a standalone software which
         PyInstaller
         
     
-##Compiling
+## Compiling
 
 The software can be compiled into an executable in Windows, Linux or Mac OSX environments, given the requirements above are fulfilled.
 
-###Step 1: Generate PyInstaller .spec file
+### Step 1: Generate PyInstaller .spec file
     
 `pyi-makespec --noconsole --onefile --add-data="model;model" Main.py`
 
-###Step 2: Modify the Main.spec file to include the following line, substituting the <...> part with the correct path
+### Step 2: Modify the Main.spec file to include the following line, substituting the <...> part with the correct path
 `hookspath=[("<Python installation path>/site-packages")]`
-###Step 3: Compile with PyInstaller
+### Step 3: Compile with PyInstaller
 `pyinstaller Main.spec`
 This should create the executable in "dist" sub-directory
 
-###Model Evaluation:
+### Model Evaluation:
 
 Evaluation on unseen testing set (878 images) for Classifier A:
 
-
--- Testing result -- 
 
 | Evaluation Metric  | Value |
 | ------------- | ------------- |
@@ -72,8 +70,6 @@ Evaluation on unseen testing set (878 images) for Classifier A:
 
 Evaluation on unseen testing set (878 images) for Classifier B:
 
-
--- Testing result -- 
 
 | Evaluation Metric  | Value |
 | ------------- | ------------- |
