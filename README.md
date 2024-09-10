@@ -1,50 +1,89 @@
-# UoL-Final
-Final Project - BSc Computer Science - University of London
+# Pneumonia iD - 
+This repository is for the ML classifier software to identify Pneumonia cases in X-Ray lung scans.
+Originally it was my Final Project for BSc Computer Science - University of London
+Dataset source: https://www.kaggle.com/datasets/pcbreviglieri/pneumonia-xray-images
 
+There are a few published papers and publicly available Jupyter-notebooks of Machine learning based models to detect Pneumonia cases from X-Ray scans, but all of them require at least some  knowledge of Python and command prompt. Additionally, they require the user to install multiple libraries before they can train the model which in itself takes hours. The goal of this project is to remove all these requirements and enable an average computer user to be able to detect possible Pneumonia cases. 
+
+
+
+![demo](./demo/pneumonia-id-demo.gif)
+
+The Jupyter notebooks contain partial model training progress and code, along with the preprocessing done on the dataset.
+shuffled_dataset.zip contains all the images the model was trained on, after they were resized and shuffled.
+
+The compiled program available in Release section is a standalone software which can be run on any computer running Windows 7 or newer, enabling the user to classify any number of X-Ray scans within moments. There is no need for any additional library installation, configuration or model training.
+
+##Features
+- Single file program, exceptionally user-friendly and easy to use machine learning binary classifier.
+- Option of using one of two built-in, pretrained models.
+- One of the best performing publicly available pneumonia detection models, achieving 96.4% accuracy and 98.1% Recall.
+- Ability to export predicted result and raw value scores to a CSV file.
+- Lightweight model, capable of inferring hundreds of images in a few seconds.
+- Option to open any of the input images directly from the results table.
  
-This is repository for full code of an image Binary classification Machine learning model, for training on X-ray lung scans of either Pneumonia cases or healthy cases. 
 
 
-It also has the code for a Windows tool which uses the trained model state to infer/predice new images as either Pneumonia or Healthy. The training code is inside the Jupyter Notebook, and was run on both a local GPU and Google Colab+.
-The prepare_dataset.py is a module for various dataset preparation functions.
-
-shuffled_dataset.zip contains all the images the model was trained on. It is resized and reorganized structure based on https://www.kaggle.com/datasets/pcbreviglieri/pneumonia-xray-images
-
-
-Requirements:
-    Python >=3.10
-    Latest PyTorch (with Cuda and supported GPU for faster training, only CPU for inference/prediction)
-    Latest PyInstaller
-    Matplotlib
-    Seaborn
-    PySide6
-    Scikit-learn
-    Jupyter-notebooks
+##Requirements
+    
+    For running only the Python GUI tool to classify images:
+        Python >=3.6
+        PyTorch >= 2.2.0 (with Cuda and supported GPU for faster training, only CPU for inference/prediction)
+        PySide6
+        Scikit-learn
     
     
-There were multiple iterations and versions of the ML model based on Convolution, and also others on SVM and KNN. The last two were deemed too inaccurate to be included, especially considering the extremely high accuracy and recall of the custom CNN model.
-
-
-The Windows tool, inside Windows_Tool, can be compiled into a single file by using PyInstaller with the following command:
+    For running the Jupyter notebooks to train the model and visualize evaluation metrics:
+        Matplotlib
+        Seaborn
+        Jupyter-notebooks
+        
+    For compiling the Python GUI tool into a standalone executable:
+        PyInstaller
+        
     
-    pyinstaller --noconsole --onefile --add-data="model/model_state.pth;model" Main.py
+##Compiling
 
+The software can be compiled into an executable in Windows, Linux or Mac OSX environments, given the requirements above are fulfilled.
 
-Model stats:
+###Step 1: Generate PyInstaller .spec file
+    
+`pyi-makespec --noconsole --onefile --add-data="model;model" Main.py`
 
-Evaluation on unseen testing set (800+ images):
+###Step 2: Modify the Main.spec file to include the following line, substituting the <...> part with the correct path
+`hookspath=[("<Python installation path>/site-packages")]`
+###Step 3: Compile with PyInstaller
+`pyinstaller Main.spec`
+This should create the executable in "dist" sub-directory
+
+###Model Evaluation:
+
+Evaluation on unseen testing set (878 images) for Classifier A:
 
 
 -- Testing result -- 
 
-Testing accuracy: 0.9578587699316629
+| Evaluation Metric  | Value |
+| ------------- | ------------- |
+| Accuracy | 0.9579  |
+| Reall  | 0.9875  |
+| Precision  | 0.9562  |
+| F1  |  0.9716  |
 
-Testing Recall: 0.9875195007800313
+Evaluation on unseen testing set (878 images) for Classifier B:
 
-Testing Precision: 0.9561933534743202
 
-Testing F1: 0.9716039907904835
+-- Testing result -- 
 
-The compiled executable can be found at: https://drive.google.com/file/d/15deJvXcL6JmB3yd79NM8DwIUJr2lILnp/view?usp=drive_link and in Release page
+| Evaluation Metric  | Value |
+| ------------- | ------------- |
+| Accuracy | 0.9647  |
+| Reall  | 0.9813  |
+| Precision  | 0.9707  |
+| F1  |  0.9760  |
 
-    
+-- Confusion Matrix -- 
+
+![confusion-matrix](./demo/model_new-confusion-matrix.png)
+
+
